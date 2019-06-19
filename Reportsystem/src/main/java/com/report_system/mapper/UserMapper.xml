@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.report_system.mapper.UserMapper">
+
+        <!--根据用户id获取用户-->
+        <select id="findUserById" parameterType="int" resultType="User">
+                select  * from tb_user where id = #{id}
+        </select>
+
+        <!--根据用户昵称获取用户-->
+        <select id="SearchUserByName" parameterType="string" resultType="User">
+                select  * from tb_user where user_name = #{name}
+        </select>
+
+        <!--获取所有用户-->
+        <select id="selectAllUser" resultType="User">
+                select  *  from tb_user
+        </select>
+        <!--更新用户信息-->
+        <update id="upDateUser" parameterType="User"  >
+                update tb_user set user_name=#{user_name}, password = #{password},
+                department=#{department} ,contact = #{contact} ,phone = #{phone}
+                where id = #{id}
+        </update>
+
+        <!--添加用户-->
+        <insert id="addUser" parameterType="User">
+                insert into tb_user
+                (user_name,password,department,contact,phone,type)
+                values
+                (#{user_name},#{password},#{department},#{contact},#{phone},#{type})
+        </insert>
+
+        <!--删除用户-->
+        <delete id="deleteUserById" parameterType="int">
+                delete from tb_user where id = #{id}
+        </delete>
+
+</mapper>
+
+

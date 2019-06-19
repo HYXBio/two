@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:命名空间，对SQL进行分类管理，SQL隔离-->
+<mapper namespace="com.report_system.mapper.NoticeMapper">
+
+    <!--获取所有公告-->
+    <resultMap id="noticeResultMap" type="Notice">
+    </resultMap>
+    <select id="getAllNotice" resultMap="noticeResultMap">
+                select  *  from tb_notice
+    </select>
+
+    <!--根据公告查找-->
+    <select id="getNoticetById"  parameterType="int" resultType="Notice">
+                select  *  from tb_notice where id = #{id}
+    </select>
+
+    <!--删除公告-->
+    <delete id="deleteNotice"  parameterType="int">
+                delete   from tb_notice where id = #{id}
+    </delete>
+
+    <!--添加公告-->
+    <insert id="addNotice"  parameterType="notice">
+                insert into  tb_notice(title,publishDate,user_id,content,url)
+                values (#{title},#{publishDate},#{user_id},#{content},#{url})
+    </insert>
+
+
+    <!--修改公告-->
+    <insert id="updateNotice"  parameterType="notice">
+                update  tb_notice set title=#{title},publishDate=#{publishDate},
+                user_id=#{user_id},content=#{content},url=#{url}
+                where id = #{id}
+    </insert>
+</mapper>

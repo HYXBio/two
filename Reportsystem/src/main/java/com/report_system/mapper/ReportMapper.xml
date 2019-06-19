@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:命名空间，对SQL进行分类管理，SQL隔离-->
+<mapper namespace="com.report_system.mapper.ReportMapper">
+    <resultMap id="getAllReportMap" type="report">
+    </resultMap>
+    <!--获取所有-->
+    <select id="getAllReport" resultType="report">
+        select  *  from tb_report
+    </select>
+
+    <!--根据id查找report-->
+    <select id="getReportById" parameterType="int" resultType="report">
+        select  *  from tb_report where id = #{id}
+    </select>
+
+    <!--根据用户id查找-->
+    <select id="getReportByUserId" resultType="report">
+        select * from tb_report where user_id = #{user_id} order by report_date desc
+    </select>
+
+    <!--更新报告-->
+    <update id="updateReport" parameterType="report"  >
+               update tb_report set
+                report_date = #{report_date} ,type = #{type},
+                title = #{title},summary = #{summary},
+                url = #{url} where id = #{id}
+    </update>
+
+    <!--添加报告-->
+    <insert id="addReport" parameterType="report">
+                insert into tb_report
+                (user_id,report_date,type,summary,title,url,status)
+                values
+                (#{user_id},#{report_date},#{type},#{summary},#{title},#{url},#{status})
+    </insert>
+
+    <!--删除报告-->
+    <delete id="deleteReport" parameterType="int">
+        delete from tb_report where id = #{id}
+    </delete>
+
+    <!--通过审核-->
+    <update id="checkReport" parameterType="report">
+         update tb_report set status = #{status} where id = #{id}
+    </update>
+
+    <!--根据内容查询-->
+    <select id="getReportBySummary" parameterType="string" resultType="report">
+        select * from tb_report where summary like #{sumarry} order by report_date desc
+    </select>
+
+    <!--根据标题查询-->
+    <select id="getReportByTitle" parameterType="string" resultType="report">
+        select * from tb_report where title like #{sumarry} order by report_date desc
+    </select>
+
+    <!--根据日期查询-->
+    <select id="getReportByDate" parameterType="MyDatePara" resultType="report">
+        select * from tb_report where report_date between #{beginDate} and #{endDate}  order by report_date desc
+    </select>
+
+</mapper>
