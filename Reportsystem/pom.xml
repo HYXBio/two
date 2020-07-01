@@ -31,7 +31,7 @@
     <commons-io.version>2.5</commons-io.version>
     <commons-codec.version>1.10</commons-codec.version>
     <aspectjweaver.version>1.8.10</aspectjweaver.version>
-    <mysql.version>5.1.34</mysql.version>
+    <mysql.version>8.0.16</mysql.version>
   </properties>
 
   <!--jar包-->
